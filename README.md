@@ -15,15 +15,31 @@ seqtk sample -s206 oilMP_S4_L001_R1_001.fastq 1500000 > subMP1.fq
 seqtk sample -s206 oilMP_S4_L001_R2_001.fastq 1500000 > subMP2.fq
 
 3)
-$ rm *.fastq
-$ ls -1 | xargs -tI{} fastqc {}
-$ mkdir fastqc_raw
-$ ls *.html -1 | xargs -tI{} mv -v {} fastqc_raw
-$ ls *.zip -1 | xargs -tI{} mv -v {} fastqc_raw
-$ multiqc fastqc_raw -o multiqc_raw
+mkdir fastqc
+fastqc sub1.fq sub2.fq submp1.fq submp2.fq -o fastqc
+mkdir multiqc
+multiqc fastqc -o multiqc
 
 4)
-![image](https://user-images.githubusercontent.com/43177979/139143243-23acd8fd-6589-4427-9aa2-04e70952bdda.png)
+platanus_trim sub1.fq sub2.fq
+platanus_internal_trim submp1.fq submp2.fq
+
+rm sub*.fq
 
 5)
-![image](https://user-images.githubusercontent.com/43177979/139143299-6db67543-68a1-4187-ae57-2e20d2e465b2.png)
+mkdir fastqc_trim
+ls | grep 'trimmed' | xargs -tI{} fastqc -o fastqc_trim {}
+multiqc fastqc_trim/ -o multiqc_trim/
+
+6)
+platanus assemble -f sub1.fq.trimmed sub2.fq.trimmed
+platanus scaffold -c out_contig.fa -IP1 sub*.fq.trimmed -OP2 submp*.fq.int_trimmed
+platanus gap_close -c out_scaffold.fa -IP1 sub*.fq.trimmed -OP2 submp*.fq.int_trimmed 
+
+rm *trimmed
+
+7)
+![image](https://user-images.githubusercontent.com/43177979/139144392-021d026b-443e-48d2-a92e-ee183cfcf44c.png)
+
+8)
+
