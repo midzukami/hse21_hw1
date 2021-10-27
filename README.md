@@ -42,4 +42,10 @@ rm *trimmed
 ![image](https://user-images.githubusercontent.com/43177979/139144392-021d026b-443e-48d2-a92e-ee183cfcf44c.png)
 
 8)
+![image](https://user-images.githubusercontent.com/43177979/139144497-dcd91a21-80d8-43d3-a6d6-b64d1541cd7a.png)
+
+9)
+![image](https://user-images.githubusercontent.com/43177979/139144561-e9457d91-7ccf-4f12-972f-70605f86b546.png)
+
+10)
 
